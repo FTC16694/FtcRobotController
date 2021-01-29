@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "MechanumDriver (Blocks to Java)", group = "")
+@TeleOp(name = "MechanumDriver (Backup)", group = "")
 public class MechanumDriver extends LinearOpMode {
 
     private DcMotor arm_mtr;
@@ -20,6 +20,8 @@ public class MechanumDriver extends LinearOpMode {
     private Servo left_pinch;
     private Servo Claw;
     private Servo dumptruck;
+    private DcMotor Shooter;
+    private DcMotor Conveyor;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -37,7 +39,8 @@ public class MechanumDriver extends LinearOpMode {
         left_pinch = hardwareMap.servo.get("left_pinch");
         Claw = hardwareMap.servo.get("Claw");
         dumptruck = hardwareMap.servo.get("dumptruck");
-
+        Shooter = hardwareMap.dcMotor.get("Shooter");
+        Conveyor = hardwareMap.dcMotor.get("Conveyor");
 
         arm_mtr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         clowmoter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -46,8 +49,6 @@ public class MechanumDriver extends LinearOpMode {
         front_right_mtr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         front_left_mtr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         right_mtr.setDirection(DcMotorSimple.Direction.REVERSE);
-        front_right_mtr.setDirection(DcMotorSimple.Direction.REVERSE);
-        arm_mtr.setDirection(DcMotorSimple.Direction.REVERSE);
         clowmoter.setDirection(DcMotorSimple.Direction.FORWARD);
         right_pinch.setDirection(Servo.Direction.REVERSE);
         wrist.setDirection(Servo.Direction.REVERSE);
@@ -56,8 +57,9 @@ public class MechanumDriver extends LinearOpMode {
         wrist.setPosition(0);
         Claw.setPosition(0.6);
         dumptruck.setPosition(0);
-        double power = 1.0;
+        double power = 0.5;
         int dumpPosition = 0;
+        double conveyor = 0;
 
         waitForStart();
         if (opModeIsActive()) {
@@ -66,16 +68,25 @@ public class MechanumDriver extends LinearOpMode {
                     left_mtr.setPower(gamepad1.left_stick_y);
                     right_mtr.setPower(gamepad1.right_stick_y);
                 }
-                Claw.setPosition(1 - gamepad1.right_trigger);
+
+                if(gamepad2.dpad_up) {
+                    conveyor = 1;
+                } else {
+                    conveyor = 0;
+                }
+
+                Claw.setPosition(1 - gamepad2.left_trigger);
                 arm_mtr.setPower(gamepad2.left_stick_y / 2);
-                clowmoter.setPower(gamepad2.right_stick_y / 3);
+                clowmoter.setPower(gamepad2.left_stick_y / 2);
+                Shooter.setPower(gamepad2.right_stick_y);
+                Conveyor.setPower(conveyor * -1);
                 wrist.setPosition(gamepad2.left_trigger / 1);
                 right_pinch.setPosition(gamepad2.right_trigger);
                 left_pinch.setPosition(gamepad2.right_trigger);
 
 
                 if(gamepad1.a) {
-                    power = 1.0;
+                    power = 1;
                 }
                 if(gamepad1.b) {
                     power = 0.5;

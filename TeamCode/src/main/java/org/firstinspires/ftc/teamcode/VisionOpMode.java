@@ -70,9 +70,9 @@ public class VisionOpMode extends LinearOpMode {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY = "";
-    /**
-     * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
-     * localization engine.
+          /**
+     *      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
+     *      * localization engine.
      */
     private VuforiaLocalizer vuforia;
 

@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
-@Autonomous(name = "MechBlueStackLine (Blocks to Java)", group = "")
+@Autonomous(name = "MechBlueStackLine (Backup)", group = "")
 
 public class MechBlueStackLine  extends LinearOpMode{
     private DcMotor arm_mtr;

@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
-@Autonomous(name = "MechBluePush (Blocks to Java)", group = "")
+@Autonomous(name = "MechBluePush (Backup)", group = "")
 
 public class MechBluePush  extends LinearOpMode{
     private DcMotor arm_mtr;
