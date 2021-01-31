@@ -124,6 +124,12 @@ public class RedAutonomous extends LinearOpMode{
 
             halt();
             sleep(1000);
+            turnRight(0.5);
+            haltSequence(450);
+            goForward(.5);
+            haltSequence(150);
+            turnLeft(.5);
+            haltSequence(450);
             goForward(0.4);
             sleep(450);
             halt();
@@ -185,88 +191,81 @@ public class RedAutonomous extends LinearOpMode{
     }
     private void doModeA() {
         turnRight(.5);
-        sleep(250);
-        halt();
-        sleep(500);
+        haltSequence(250);
         goForward(.5);
-        sleep(800);
-        halt();
-        sleep(500);
-          turnLeft(0.5);
-         sleep(250);
-         halt();
-    sleep(500);
-    goForward(.5);
-    sleep(650);
-
-    halt();
-        Claw.setPosition(1);
-        sleep(2000);
-        Shooter.setPower(-1);
-        sleep(4000);
-        Conveyor.setPower(-1);
-        sleep(10000);
-        Shooter.setPower(0);
-        Conveyor.setPower(0);
-        sleep(1000);
-
-
+        haltSequence(800);
+        turnLeft(0.5);
+        haltSequence(250);
+        goForward(.5);
+        haltSequence(650);
+        clawSequence();                     //claw is here
+        goBackwards(.5);
+        haltSequence(150);
+        turnLeft(.5);
+        haltSequence(450);
+        goForward(.5);
+        haltSequence(350);
+        turnRight(.5);
+        haltSequence(450);
+        shootSequence();                    //shoot is here
+        parkOnLine();
 }
     private void doModeB()  {
         turnRight(.5);
-        sleep(250);
-        halt();
-        sleep(500);
+        haltSequence(250);
         goForward(.5);
-        sleep(800);
-        halt();
-        sleep(500);
+        haltSequence(800);
         turnLeft(0.5);
-        sleep(250);
-        halt();
-        sleep(500);
+        haltSequence(250);
         goForward(.5);
-        sleep(800);
+        haltSequence(800);
         turnLeft(0.5);
-        sleep(250);
-        halt();
+        haltSequence(250);
         goForward(0.5);
-        sleep(350);
-
-        halt();
-        Claw.setPosition(1);
-        sleep(2000);
+        haltSequence(350);
+        clawSequence();                     //claw is here
+        goBackwards(.5);
+        haltSequence(250);
+        turnLeft(.5);
+        haltSequence(250);
+        goForward(.5);
+        haltSequence(300);
+        turnRight(.5);
+        haltSequence(450);
+        goBackwards(.5);
+        haltSequence(300);
+        shootSequence();                    //shoot is here
+        parkOnLine();
     }
     private void doModeC() {
         turnRight(.5);
-        sleep(250);
-        halt();
-        sleep(500);
+        haltSequence(250);
         goForward(.5);
-        sleep(800);
-        halt();
-        sleep(500);
+        haltSequence(800);
         turnLeft(0.5);
-        sleep(250);
-        halt();
-        sleep(500);
+        haltSequence(250);
         goForward(.5);
-        sleep(1500);
-
-        halt();
-        Claw.setPosition(1);
-        sleep(2000);
+        haltSequence(1400);
+        clawSequence();                     //claw is here
+        goBackwards(.5);
+        haltSequence(900);
+        turnLeft(.5);
+        haltSequence(450);
+        goForward(.5);
+        haltSequence(400);
+        turnRight(.5);
+        haltSequence(450);
+        shootSequence();                    //shoot is here
+        parkOnLine();
     }
-
-
 
 
 
     private void strafeRight(double power) {
-            left_mtr.setPower(power * -1);
-            right_mtr.setPower(power);
-            front_left_mtr.setPower(power);
-            front_right_mtr.setPower(power * -1);
+        left_mtr.setPower(power * -1);
+        right_mtr.setPower(power);
+        front_left_mtr.setPower(power);
+        front_right_mtr.setPower(power * -1);
         }
 
     private void turnLeft(double power) {
@@ -309,6 +308,30 @@ public class RedAutonomous extends LinearOpMode{
         front_right_mtr.setPower(0);
         front_left_mtr.setPower(0);
     }
+    private void shootSequence() {
+        Shooter.setPower(-1);
+        sleep(4000);
+        Conveyor.setPower(-1);
+        sleep(10000);
+        Shooter.setPower(0);
+        Conveyor.setPower(0);
+        sleep(1000);
+    }
+    private void clawSequence() {
+        Claw.setPosition(1);
+        sleep(2000);
+    }
+    private void haltSequence(long duration) {
+        sleep(duration);
+        halt();
+        sleep(500);
+    }
+    private void parkOnLine() {
+        goForward(.5);
+        haltSequence(200);
+    }
+
+
     /**
      * Initialize the Vuforia localization engine.
      */
